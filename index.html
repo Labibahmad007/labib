@@ -7,7 +7,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
@@ -15,33 +15,34 @@
     theme: {
       extend: {
         colors: {
-          bg: '#0d0d0f',
-          'bg-soft': '#17171b',
-          card: '#1c1c21',
-          text: '#f5f5f6',
-          muted: '#9a9aa3',
-          accent: '#c6f73d',
-          light: '#ffffff',
-          'light-soft': '#f1f1f3',
-          ink: '#0d0d0f',
+          background: 'var(--background)',
+          foreground: 'var(--foreground)',
+          border: 'var(--border)',
+          input: 'var(--input)',
+          ring: 'var(--ring)',
+          primary: { DEFAULT: 'var(--primary)', foreground: 'var(--primary-foreground)' },
+          secondary: { DEFAULT: 'var(--secondary)', foreground: 'var(--secondary-foreground)' },
+          muted: { DEFAULT: 'var(--muted)', foreground: 'var(--muted-foreground)' },
+          accent: { DEFAULT: 'var(--accent)', foreground: 'var(--accent-foreground)' },
+          card: { DEFAULT: 'var(--card)', foreground: 'var(--card-foreground)' },
         },
         fontFamily: {
-          sans: ['Inter', 'sans-serif'],
+          display: ['"Instrument Serif"', 'ui-serif', 'Georgia', 'serif'],
+          sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+          mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
         },
         borderRadius: {
-          r: '26px',
-        },
-        screens: {
-          bp: '860px',
+          DEFAULT: '.25rem',
+          lg: '.5rem',
         },
         keyframes: {
           fadeUp: {
-            '0%': { opacity: '0', transform: 'translateY(22px)' },
+            '0%': { opacity: '0', transform: 'translateY(16px)' },
             '100%': { opacity: '1', transform: 'translateY(0)' },
           },
         },
         animation: {
-          fadeUp: 'fadeUp .9s ease forwards',
+          fadeUp: 'fadeUp .8s cubic-bezier(.4,0,.2,1) forwards',
         },
       },
     },
@@ -49,215 +50,228 @@
 </script>
 
 <style>
+  :root {
+    --background: oklch(96.5% .018 85);
+    --foreground: oklch(18% .015 60);
+    --primary: oklch(18% .015 60);
+    --primary-foreground: oklch(96.5% .018 85);
+    --secondary: oklch(92% .022 80);
+    --secondary-foreground: oklch(18% .015 60);
+    --muted: oklch(92% .022 80);
+    --muted-foreground: oklch(42% .018 60);
+    --accent: oklch(62% .21 32);
+    --accent-foreground: oklch(98% .01 85);
+    --card: oklch(98% .012 85);
+    --card-foreground: oklch(18% .015 60);
+    --border: oklch(82% .02 70);
+    --input: oklch(82% .02 70);
+    --ring: oklch(62% .21 32);
+    --radius: .25rem;
+  }
   html { scroll-behavior: smooth; }
   body { font-family: 'Inter', sans-serif; }
+  ::selection { background: var(--accent); color: var(--accent-foreground); }
+  .font-display { font-feature-settings: "liga" 1; }
 </style>
 </head>
 
-<body class="bg-bg text-text font-sans leading-[1.55] overflow-x-hidden">
+<body class="bg-background text-foreground font-sans antialiased overflow-x-hidden">
 
   <!-- NAV -->
-  <nav class="fixed top-3.5 left-1/2 -translate-x-1/2 w-[calc(100%-32px)] max-w-[1180px] z-[100] flex items-center justify-between pl-6 pr-3.5 py-3 bg-[rgba(23,23,27,.72)] backdrop-blur-[14px] border border-white/10 rounded-full">
-    <div class="font-black text-[18px] tracking-[-.02em]">Ahmad Zakaria<span class="text-accent">.</span></div>
-    <div class="hidden bp:flex gap-[30px]">
-      <a href="#about" class="text-muted no-underline text-[14px] font-medium transition-colors hover:text-text">About</a>
-      <a href="#services" class="text-muted no-underline text-[14px] font-medium transition-colors hover:text-text">What I do</a>
-      <a href="#work" class="text-muted no-underline text-[14px] font-medium transition-colors hover:text-text">Work</a>
-      <a href="#experience" class="text-muted no-underline text-[14px] font-medium transition-colors hover:text-text">Experience</a>
+  <nav class="fixed top-0 inset-x-0 z-50 border-b border-border/70 bg-background/80 backdrop-blur-md">
+    <div class="max-w-[1180px] mx-auto px-6 h-16 flex items-center justify-between">
+      <a href="#top" class="font-mono text-[13px] tracking-wide text-foreground">Ahmad Zakaria Labib</a>
+      <div class="hidden md:flex items-center gap-8 font-mono text-[12px] tracking-widest uppercase">
+        <a href="#work" class="text-muted-foreground hover:text-accent transition-colors">Work</a>
+        <a href="#about" class="text-muted-foreground hover:text-accent transition-colors">About</a>
+        <a href="#experience" class="text-muted-foreground hover:text-accent transition-colors">Experience</a>
+        <a href="#contact" class="text-muted-foreground hover:text-accent transition-colors">Contact</a>
+      </div>
+      <a href="https://drive.google.com/uc?export=download&id=1ThRpTD6toeixikvnv1KU6n-6PQm_Xwyd" target="_blank" rel="noopener" class="group inline-flex items-center gap-2 bg-accent text-accent-foreground px-4 py-2 rounded font-mono text-[12px] tracking-widest uppercase transition-opacity hover:opacity-90">
+        Resume <span class="transition-transform duration-300 group-hover:translate-y-0.5">↓</span>
+      </a>
     </div>
-    <a href="https://drive.google.com/uc?export=download&id=1ThRpTD6toeixikvnv1KU6n-6PQm_Xwyd" target="_blank" rel="noopener" class="group inline-flex items-center gap-2 bg-accent text-ink pl-5 pr-2.5 py-1.5 rounded-full font-semibold text-[14px] no-underline transition-transform duration-200 hover:-translate-y-0.5">Download resume <span class="w-6 h-6 rounded-full bg-ink text-accent flex items-center justify-center text-[12px] transition-transform duration-300 group-hover:translate-y-0.5">↓</span></a>
   </nav>
 
   <!-- HERO -->
-  <header class="relative pt-[150px] pb-10 max-w-[1200px] mx-auto px-6" id="top">
-    <div class="absolute top-[10%] right-0 w-[460px] h-[460px] bg-[radial-gradient(circle,rgba(198,247,61,.12),transparent_70%)] blur-[40px] -z-10"></div>
-
-    <div class="grid grid-cols-1 bp:grid-cols-[1.1fr_.9fr] gap-9 bp:gap-[50px] items-center">
-      <div class="min-w-0">
-        <span class="inline-flex items-center gap-2 border border-white/10 rounded-full px-4 py-2 text-[13px] font-semibold text-text mb-[26px] opacity-0 animate-[fadeUp_.8s_ease_forwards_.1s]">
-          <span class="w-[7px] h-[7px] rounded-full bg-accent shadow-[0_0_10px_#c6f73d]"></span> Available for new projects
-        </span>
-        <h1 class="text-[clamp(40px,5.2vw,78px)] leading-[.96] tracking-[-.035em] font-extrabold mb-[30px]">
-          <span class="block opacity-0 animate-[fadeUp_.9s_ease_forwards] [animation-delay:.2s]">Designing</span>
-          <span class="block opacity-0 animate-[fadeUp_.9s_ease_forwards] [animation-delay:.32s]">products that</span>
-          <span class="block opacity-0 animate-[fadeUp_.9s_ease_forwards] [animation-delay:.44s]">feel <em class="text-accent not-italic">effortless.</em></span>
+  <header id="top" class="max-w-[1180px] mx-auto px-6 pt-36 pb-20">
+    <div class="grid grid-cols-1 md:grid-cols-[1.25fr_.75fr] gap-12 md:gap-16 items-center">
+      <div>
+        <div class="flex items-center gap-3 font-mono text-[12px] tracking-widest uppercase text-muted-foreground mb-8 opacity-0 animate-[fadeUp_.8s_ease_forwards_.1s]">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent"></span>
+          UI/UX Designer — Available for work
+        </div>
+        <h1 class="font-display font-normal text-[clamp(44px,7vw,92px)] leading-[.98] tracking-[-.01em] mb-8">
+          <span class="block opacity-0 animate-[fadeUp_.8s_ease_forwards] [animation-delay:.2s]">Designing products</span>
+          <span class="block opacity-0 animate-[fadeUp_.8s_ease_forwards] [animation-delay:.32s]">that feel <em class="italic text-accent">effortless.</em></span>
         </h1>
-        <p class="text-[19px] text-muted max-w-[540px] mb-[38px] opacity-0 animate-[fadeUp_.9s_ease_forwards_.56s]">I'm a UI/UX designer crafting clear, usable digital products — from research to polished interface. Currently designing at Sparktech Agency.</p>
-        <div class="flex gap-3.5 flex-wrap opacity-0 animate-[fadeUp_.9s_ease_forwards_.68s]">
-          <a href="#work" class="group inline-flex items-center gap-3 no-underline font-semibold text-[15px] pl-[22px] pr-[7px] py-[7px] rounded-full bg-accent text-ink transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(198,247,61,.28)]">View my work <span class="w-9 h-9 rounded-full flex items-center justify-center text-base bg-ink text-accent transition-transform duration-300 group-hover:rotate-45">↗</span></a>
-          <a href="#contact" class="group inline-flex items-center gap-3 no-underline font-semibold text-[15px] pl-[22px] pr-[7px] py-[7px] rounded-full bg-card text-text border border-white/10 transition duration-200 hover:-translate-y-0.5 hover:bg-[#232329]">Get in touch <span class="w-9 h-9 rounded-full flex items-center justify-center text-base bg-bg text-text transition-transform duration-300 group-hover:rotate-45">↗</span></a>
+        <p class="text-[18px] md:text-[19px] leading-relaxed text-muted-foreground max-w-[520px] mb-10 opacity-0 animate-[fadeUp_.8s_ease_forwards_.46s]">
+          I'm a UI/UX designer crafting clear, usable digital products — from research to polished interface. Currently designing at Sparktech Agency.
+        </p>
+        <div class="flex flex-wrap items-center gap-4 opacity-0 animate-[fadeUp_.8s_ease_forwards_.58s]">
+          <a href="#work" class="group inline-flex items-center gap-2.5 bg-primary text-primary-foreground px-6 py-3 rounded font-mono text-[12px] tracking-widest uppercase transition-opacity hover:opacity-90">
+            View work <span class="transition-transform duration-300 group-hover:translate-x-1">→</span>
+          </a>
+          <a href="#contact" class="group inline-flex items-center gap-2.5 border border-border px-6 py-3 rounded font-mono text-[12px] tracking-widest uppercase text-foreground transition-colors hover:bg-secondary">
+            Get in touch
+          </a>
         </div>
       </div>
 
-      <div>
-        <div class="relative rounded-r overflow-hidden aspect-[4/5] bg-card border border-white/10 opacity-0 animate-[fadeUp_.9s_ease_forwards_.5s]">
-          <img src="hero.png" alt="Ahmad Zakaria Labib" class="w-full h-full object-cover block">
-          <div class="absolute inset-0 bg-[linear-gradient(to_top,rgba(13,13,15,.5),transparent_55%)]"></div>
-          <span class="absolute bottom-[18px] left-[18px] z-[2] bg-accent text-ink text-[13px] font-semibold px-[15px] py-[7px] rounded-full">Ahmad Zakaria Labib</span>
+      <div class="opacity-0 animate-[fadeUp_.8s_ease_forwards_.4s]">
+        <div class="relative bg-background rounded overflow-hidden aspect-[4/5]">
+          <img src="hero.png" alt="Ahmad Zakaria Labib" class="absolute inset-0 w-full h-full object-cover object-bottom">
         </div>
       </div>
     </div>
 
-    <!-- STAT BAR -->
-    <div class="grid grid-cols-1 bp:grid-cols-[1.1fr_1.4fr_1fr] gap-4 mt-[60px] opacity-0 animate-[fadeUp_.9s_ease_forwards_.8s]">
-      <div class="bg-card border border-white/10 rounded-r p-6">
-        <div class="text-[38px] font-extrabold tracking-[-.02em]">3+</div>
-        <div class="text-[14px] text-muted mt-0.5">Live products shipped</div>
+    <!-- META STRIP -->
+    <div class="mt-16 pt-8 border-t border-border grid grid-cols-2 md:grid-cols-4 gap-8 opacity-0 animate-[fadeUp_.8s_ease_forwards_.7s]">
+      <div>
+        <div class="font-display text-4xl leading-none">3+</div>
+        <div class="font-mono text-[11px] tracking-widest uppercase text-muted-foreground mt-2">Live products</div>
       </div>
-      <div class="bg-card border border-white/10 rounded-r p-6">
-        <p class="text-[15px] text-text leading-[1.4]"><b class="font-bold">Good design is invisible.</b> I focus on the small decisions — spacing, motion, hierarchy — that make an interface just work.</p>
+      <div>
+        <div class="font-display text-4xl leading-none">20+</div>
+        <div class="font-mono text-[11px] tracking-widest uppercase text-muted-foreground mt-2">Projects delivered</div>
       </div>
-      <div class="relative bg-accent text-ink border border-white/10 rounded-r p-6">
-        <div class="absolute top-[22px] right-[22px] w-[34px] h-[34px] rounded-full bg-ink text-accent flex items-center justify-center">↗</div>
-        <div class="text-[38px] font-extrabold tracking-[-.02em]">UI / UX</div>
-        <div class="text-[14px] text-ink/70 mt-0.5">Product &amp; interface design</div>
+      <div>
+        <div class="font-display text-4xl leading-none">2025</div>
+        <div class="font-mono text-[11px] tracking-widest uppercase text-muted-foreground mt-2">At Sparktech</div>
+      </div>
+      <div>
+        <div class="font-display text-4xl leading-none italic text-accent">UI/UX</div>
+        <div class="font-mono text-[11px] tracking-widest uppercase text-muted-foreground mt-2">Product &amp; interface</div>
       </div>
     </div>
   </header>
 
+  <!-- SELECTED WORK -->
+  <section id="work" class="max-w-[1180px] mx-auto px-6 py-24">
+    <div class="reveal opacity-0 translate-y-4 transition-all duration-700 ease-out flex items-end justify-between gap-6 mb-14 flex-wrap">
+      <div>
+        <span class="font-mono text-[12px] tracking-widest uppercase text-accent">§ 01 — Selected work</span>
+        <h2 class="font-display text-[clamp(34px,5vw,56px)] leading-[1.05] mt-3">Live projects</h2>
+      </div>
+      <p class="max-w-[340px] text-[15px] leading-relaxed text-muted-foreground">Three real, shipped products — click any to explore the live site.</p>
+    </div>
+
+    <div class="border-t border-border">
+      <a class="reveal opacity-0 translate-y-4 transition-all duration-700 ease-out group grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-4 md:gap-10 items-baseline border-b border-border py-9" href="https://senduback.com/" target="_blank" rel="noopener">
+        <span class="font-mono text-[13px] text-muted-foreground">01</span>
+        <div>
+          <h3 class="font-display text-[clamp(26px,3.5vw,40px)] leading-tight transition-colors group-hover:text-accent">SendUBack</h3>
+          <p class="font-mono text-[11px] tracking-widest uppercase text-accent mt-2 mb-3">Product &amp; UX Design — Web Platform</p>
+          <p class="text-[15px] leading-relaxed text-muted-foreground max-w-[640px]">A smart lost-and-found platform — hotels manage lost items from one dashboard, and guests book secure, insured shipping to get belongings returned worldwide.</p>
+        </div>
+        <span class="font-mono text-2xl text-muted-foreground transition-all duration-300 group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+      </a>
+
+      <a class="reveal opacity-0 translate-y-4 transition-all duration-700 ease-out group grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-4 md:gap-10 items-baseline border-b border-border py-9" href="https://fixmincykel.dk/" target="_blank" rel="noopener">
+        <span class="font-mono text-[13px] text-muted-foreground">02</span>
+        <div>
+          <h3 class="font-display text-[clamp(26px,3.5vw,40px)] leading-tight transition-colors group-hover:text-accent">FixMinCykel</h3>
+          <p class="font-mono text-[11px] tracking-widest uppercase text-accent mt-2 mb-3">UI/UX Design — Marketplace</p>
+          <p class="text-[15px] leading-relaxed text-muted-foreground max-w-[640px]">A Danish bike-repair marketplace. Cyclists post their issue, receive offers from verified local workshops, compare prices and reviews, and book in minutes.</p>
+        </div>
+        <span class="font-mono text-2xl text-muted-foreground transition-all duration-300 group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+      </a>
+
+      <a class="reveal opacity-0 translate-y-4 transition-all duration-700 ease-out group grid grid-cols-1 md:grid-cols-[auto_1fr_auto] gap-4 md:gap-10 items-baseline border-b border-border py-9" href="https://www.goroqit.com/" target="_blank" rel="noopener">
+        <span class="font-mono text-[13px] text-muted-foreground">03</span>
+        <div>
+          <h3 class="font-display text-[clamp(26px,3.5vw,40px)] leading-tight transition-colors group-hover:text-accent">GoRoqit</h3>
+          <p class="font-mono text-[11px] tracking-widest uppercase text-accent mt-2 mb-3">Product &amp; UX Design — Talent Marketplace</p>
+          <p class="text-[15px] leading-relaxed text-muted-foreground max-w-[640px]">A hiring platform for the beauty industry — connecting salons and barbers with verified stylists through social-style profiles, instant job posts and smart matching.</p>
+        </div>
+        <span class="font-mono text-2xl text-muted-foreground transition-all duration-300 group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+      </a>
+    </div>
+  </section>
+
   <!-- ABOUT -->
-  <section class="bg-card text-text rounded-[40px] mx-6" id="about">
-    <div class="max-w-[1152px] mx-auto px-6 py-20">
-      <div class="reveal opacity-0 translate-y-7 transition-all duration-700 ease-out grid grid-cols-1 bp:grid-cols-[.8fr_1fr] gap-[30px] bp:gap-[50px] items-center">
-        <div class="bg-light-soft border border-black/10 rounded-r p-[34px]">
-          <span class="inline-flex items-center gap-2 border border-black/10 text-ink bg-light rounded-full px-4 py-2 text-[13px] font-semibold mb-6">Quick facts</span>
-          <div class="flex flex-col">
-            <div class="flex justify-between py-4 border-b border-black/10 text-[15px]"><span class="text-[#77777f]">Role</span><strong class="text-ink font-bold">UI/UX Designer</strong></div>
-            <div class="flex justify-between py-4 border-b border-black/10 text-[15px]"><span class="text-[#77777f]">Based in</span><strong class="text-ink font-bold">[City]</strong></div>
-            <div class="flex justify-between py-4 border-b border-black/10 text-[15px]"><span class="text-[#77777f]">Currently</span><strong class="text-ink font-bold">Sparktech Agency</strong></div>
-            <div class="flex justify-between py-4 border-b border-black/10 text-[15px]"><span class="text-[#77777f]">Focus</span><strong class="text-ink font-bold">Marketplace &amp; product design</strong></div>
-            <div class="flex justify-between pt-4 text-[15px]"><span class="text-[#77777f]">Available</span><strong class="text-[#5a8a00] font-bold">Yes — let's talk</strong></div>
+  <section id="about" class="bg-card border-y border-border">
+    <div class="max-w-[1180px] mx-auto px-6 py-24">
+      <div class="reveal opacity-0 translate-y-4 transition-all duration-700 ease-out grid grid-cols-1 md:grid-cols-[.85fr_1.15fr] gap-12 md:gap-16">
+        <div>
+          <span class="font-mono text-[12px] tracking-widest uppercase text-accent">§ 02 — About</span>
+          <div class="mt-8 divide-y divide-border border-y border-border">
+            <div class="flex justify-between py-4 text-[14px]"><span class="font-mono text-[11px] tracking-widest uppercase text-muted-foreground">Role</span><span class="font-medium">UI/UX Designer</span></div>
+            <div class="flex justify-between py-4 text-[14px]"><span class="font-mono text-[11px] tracking-widest uppercase text-muted-foreground">Based in</span><span class="font-medium">[City]</span></div>
+            <div class="flex justify-between py-4 text-[14px]"><span class="font-mono text-[11px] tracking-widest uppercase text-muted-foreground">Currently</span><span class="font-medium">Sparktech Agency</span></div>
+            <div class="flex justify-between py-4 text-[14px]"><span class="font-mono text-[11px] tracking-widest uppercase text-muted-foreground">Focus</span><span class="font-medium">Marketplace &amp; product</span></div>
+            <div class="flex justify-between py-4 text-[14px]"><span class="font-mono text-[11px] tracking-widest uppercase text-muted-foreground">Available</span><span class="font-medium text-accent">Yes — let's talk</span></div>
           </div>
         </div>
         <div>
-          <span class="inline-flex items-center gap-2 border border-black/10 text-ink bg-light rounded-full px-4 py-2 text-[13px] font-semibold">About me</span>
-          <h3 class="text-[clamp(26px,3.5vw,40px)] tracking-[-.02em] font-extrabold leading-[1.1] mt-[18px] mb-[22px]">A designer who turns complex problems into simple, usable products.</h3>
-          <p class="text-[17px] text-muted mb-[18px]">I'm a <strong class="text-text font-bold">UI/UX designer</strong> based in [City], focused on building digital products that are both beautiful and genuinely useful. My process starts with understanding people — then designing the simplest path to what they need.</p>
-          <p class="text-[17px] text-muted mb-[18px]">I'm joining <strong class="text-text font-bold">Sparktech Agency</strong> in June 2025. Lately I've been drawn to two-sided marketplace products — designing flows that connect the right people and make the complicated feel obvious.</p>
+          <h2 class="font-display text-[clamp(30px,4.2vw,48px)] leading-[1.1] mb-8">A designer who turns complex problems into <em class="italic text-accent">simple</em>, usable products.</h2>
+          <p class="text-[17px] leading-relaxed text-muted-foreground mb-5">I'm a <span class="text-foreground font-medium">UI/UX designer</span> based in [City], focused on building digital products that are both beautiful and genuinely useful. My process starts with understanding people — then designing the simplest path to what they need.</p>
+          <p class="text-[17px] leading-relaxed text-muted-foreground">I joined <span class="text-foreground font-medium">Sparktech Agency</span> in 2025. Lately I've been drawn to two-sided marketplace products — designing flows that connect the right people and make the complicated feel obvious.</p>
+
+          <div class="mt-10 flex flex-wrap gap-2.5">
+            <span class="font-mono text-[11px] tracking-widest uppercase border border-border rounded px-3 py-1.5 text-muted-foreground">User Research</span>
+            <span class="font-mono text-[11px] tracking-widest uppercase border border-border rounded px-3 py-1.5 text-muted-foreground">Wireframing</span>
+            <span class="font-mono text-[11px] tracking-widest uppercase border border-border rounded px-3 py-1.5 text-muted-foreground">Prototyping</span>
+            <span class="font-mono text-[11px] tracking-widest uppercase border border-border rounded px-3 py-1.5 text-muted-foreground">UI Design</span>
+            <span class="font-mono text-[11px] tracking-widest uppercase border border-border rounded px-3 py-1.5 text-muted-foreground">Design Systems</span>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- WHAT I DO -->
-  <section class="py-[100px] max-w-[1200px] mx-auto px-6" id="services">
-    <div class="reveal opacity-0 translate-y-7 transition-all duration-700 ease-out flex items-end justify-between gap-5 mb-12 flex-wrap">
-      <div>
-        <span class="inline-flex items-center gap-2 border border-white/10 rounded-full px-4 py-2 text-[13px] font-semibold text-text"><span class="w-[7px] h-[7px] rounded-full bg-accent shadow-[0_0_10px_#c6f73d]"></span> Capabilities</span>
-        <h2 class="text-[clamp(32px,5vw,54px)] tracking-[-.03em] font-extrabold leading-none mt-4">What I do</h2>
-      </div>
-      <p class="max-w-[360px] text-muted text-[16px]">End-to-end product design — I take ideas from research and rough sketches all the way to a polished, shippable interface.</p>
-    </div>
-
-    <div class="reveal opacity-0 translate-y-7 transition-all duration-700 ease-out grid grid-cols-2 bp:grid-cols-4 gap-4 auto-rows-[minmax(150px,auto)]">
-      <div class="col-span-2 bg-bg-soft border border-white/10 rounded-r p-[26px] flex flex-col justify-center transition-[border-color,transform] duration-300 hover:border-accent/30 hover:-translate-y-[3px]">
-        <h3 class="text-[28px] font-extrabold tracking-[-.02em] leading-[1.1]">From <em class="text-accent not-italic">research</em> to <em class="text-accent not-italic">pixel-perfect</em> interface — I cover the whole product design journey.</h3>
-      </div>
-      <div class="bg-card border border-white/10 rounded-r p-[26px] flex flex-col justify-between transition-[border-color,transform] duration-300 hover:border-accent/30 hover:-translate-y-[3px]">
-        <div class="text-[40px] font-extrabold tracking-[-.02em] text-text"><em class="text-accent not-italic">3</em>+</div>
-        <div class="text-[14px] text-muted">Live products designed</div>
-      </div>
-      <div class="bg-card border border-white/10 rounded-r p-[26px] flex flex-col justify-between transition-[border-color,transform] duration-300 hover:border-accent/30 hover:-translate-y-[3px]">
-        <div class="text-[40px] font-extrabold tracking-[-.02em] text-text"><em class="text-accent not-italic">20</em>+</div>
-        <div class="text-[14px] text-muted">Projects delivered</div>
-      </div>
-
-      <div class="col-span-2 row-span-1 bp:row-span-2 min-h-[220px] bp:min-h-0 relative overflow-hidden bg-[radial-gradient(circle_at_70%_30%,#232a14,#1c1c21)] border border-white/10 rounded-r p-[26px] flex flex-col items-center justify-center transition-[border-color,transform] duration-300 hover:border-accent/30 hover:-translate-y-[3px]">
-        <div class="text-[clamp(80px,14vw,150px)] font-black tracking-[-.05em] text-accent leading-none">.AZL</div>
-        <div class="absolute bottom-6 left-[26px] right-[26px] text-muted text-[14px]">Ahmad Zakaria Labib — UI/UX Designer</div>
-      </div>
-
-      <div class="bg-card border border-white/10 rounded-r p-[26px] flex flex-col justify-between transition-[border-color,transform] duration-300 hover:border-accent/30 hover:-translate-y-[3px]">
-        <div class="w-[46px] h-[46px] rounded-[12px] bg-bg flex items-center justify-center text-accent">◑</div>
-        <div><h4 class="text-[18px] font-bold tracking-[-.01em] mb-1.5">User Research</h4><p class="text-[14px] text-muted">Understanding people, flows and pain points before any pixel is drawn.</p></div>
-      </div>
-      <div class="bg-card border border-white/10 rounded-r p-[26px] flex flex-col justify-between transition-[border-color,transform] duration-300 hover:border-accent/30 hover:-translate-y-[3px]">
-        <div class="w-[46px] h-[46px] rounded-[12px] bg-bg flex items-center justify-center text-accent">✎</div>
-        <div><h4 class="text-[18px] font-bold tracking-[-.01em] mb-1.5">Wireframing</h4><p class="text-[14px] text-muted">Fast, low-fidelity structure to test ideas and nail the layout early.</p></div>
-      </div>
-      <div class="bg-card border border-white/10 rounded-r p-[26px] flex flex-col justify-between transition-[border-color,transform] duration-300 hover:border-accent/30 hover:-translate-y-[3px]">
-        <div class="w-[46px] h-[46px] rounded-[12px] bg-bg flex items-center justify-center text-accent">▦</div>
-        <div><h4 class="text-[18px] font-bold tracking-[-.01em] mb-1.5">Prototyping</h4><p class="text-[14px] text-muted">Interactive, clickable flows that feel like the real thing.</p></div>
-      </div>
-      <div class="bg-card border border-white/10 rounded-r p-[26px] flex flex-col justify-between transition-[border-color,transform] duration-300 hover:border-accent/30 hover:-translate-y-[3px]">
-        <div class="w-[46px] h-[46px] rounded-[12px] bg-bg flex items-center justify-center text-accent">◆</div>
-        <div><h4 class="text-[18px] font-bold tracking-[-.01em] mb-1.5">UI &amp; Design Systems</h4><p class="text-[14px] text-muted">Polished interfaces and reusable components that scale.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WORK -->
-  <section class="py-[100px] max-w-[1200px] mx-auto px-6" id="work">
-    <div class="reveal opacity-0 translate-y-7 transition-all duration-700 ease-out flex items-end justify-between gap-5 mb-12 flex-wrap">
-      <div>
-        <span class="inline-flex items-center gap-2 border border-white/10 rounded-full px-4 py-2 text-[13px] font-semibold text-text"><span class="w-[7px] h-[7px] rounded-full bg-accent shadow-[0_0_10px_#c6f73d]"></span> Selected work</span>
-        <h2 class="text-[clamp(32px,5vw,54px)] tracking-[-.03em] font-extrabold leading-none mt-4">Live projects</h2>
-      </div>
-      <p class="max-w-[360px] text-muted text-[16px]">Three real, shipped products — click any to explore the live site.</p>
-    </div>
-
-    <div class="grid grid-cols-1 bp:grid-cols-2 gap-5">
-      <a class="reveal opacity-0 translate-y-7 group relative bg-card border border-white/10 rounded-r overflow-hidden no-underline text-inherit block transition-all duration-700 ease-out hover:-translate-y-[6px] hover:border-accent/30" href="https://senduback.com/" target="_blank" rel="noopener">
-        <div class="h-[300px] flex items-center justify-center text-[44px] font-extrabold tracking-[-.02em] text-white/[0.18] relative overflow-hidden bg-[linear-gradient(135deg,#16261a,#22351c)]">SendUBack<span class="absolute top-[18px] left-[18px] bg-light text-ink text-[12px] font-semibold px-[14px] py-[7px] rounded-full">Web Platform</span><span class="absolute top-4 right-4 w-[42px] h-[42px] rounded-full bg-white/10 flex items-center justify-center text-[18px] transition duration-300 group-hover:bg-accent group-hover:text-ink group-hover:rotate-45">↗</span></div>
-        <div class="pt-6 px-[26px] pb-7"><div class="text-[13px] text-accent font-semibold mb-2">Product &amp; UX Design</div><h3 class="text-[23px] tracking-[-.02em] mb-2">SendUBack</h3><p class="text-[15px] text-muted">A smart lost-and-found platform — hotels manage lost items from one dashboard, and guests book secure, insured shipping to get belongings returned worldwide.</p></div>
-      </a>
-      <a class="reveal opacity-0 translate-y-7 group relative bg-card border border-white/10 rounded-r overflow-hidden no-underline text-inherit block transition-all duration-700 ease-out hover:-translate-y-[6px] hover:border-accent/30" href="https://fixmincykel.dk/" target="_blank" rel="noopener">
-        <div class="h-[300px] flex items-center justify-center text-[44px] font-extrabold tracking-[-.02em] text-white/[0.18] relative overflow-hidden bg-[linear-gradient(135deg,#161d2c,#241a38)]">FixMinCykel<span class="absolute top-[18px] left-[18px] bg-light text-ink text-[12px] font-semibold px-[14px] py-[7px] rounded-full">Marketplace</span><span class="absolute top-4 right-4 w-[42px] h-[42px] rounded-full bg-white/10 flex items-center justify-center text-[18px] transition duration-300 group-hover:bg-accent group-hover:text-ink group-hover:rotate-45">↗</span></div>
-        <div class="pt-6 px-[26px] pb-7"><div class="text-[13px] text-accent font-semibold mb-2">UI/UX Design</div><h3 class="text-[23px] tracking-[-.02em] mb-2">FixMinCykel</h3><p class="text-[15px] text-muted">A Danish bike-repair marketplace. Cyclists post their issue, receive offers from verified local workshops, compare prices and reviews, and book in minutes.</p></div>
-      </a>
-      <a class="reveal opacity-0 translate-y-7 group relative bg-card border border-white/10 rounded-r overflow-hidden no-underline text-inherit block transition-all duration-700 ease-out hover:-translate-y-[6px] hover:border-accent/30" href="https://www.goroqit.com/" target="_blank" rel="noopener">
-        <div class="h-[300px] flex items-center justify-center text-[44px] font-extrabold tracking-[-.02em] text-white/[0.18] relative overflow-hidden bg-[linear-gradient(135deg,#2a1a22,#3a1e2c)]"><img class="absolute inset-0 w-full h-full object-cover z-[1]" alt="GoRoqit cover" onerror="this.remove()" src="REPLACE_WITH_COVER_URL">GoRoqit<span class="absolute top-[18px] left-[18px] z-[2] bg-light text-ink text-[12px] font-semibold px-[14px] py-[7px] rounded-full">Talent Marketplace</span><span class="absolute top-4 right-4 z-[2] w-[42px] h-[42px] rounded-full bg-white/10 flex items-center justify-center text-[18px] transition duration-300 group-hover:bg-accent group-hover:text-ink group-hover:rotate-45">↗</span></div>
-        <div class="pt-6 px-[26px] pb-7"><div class="text-[13px] text-accent font-semibold mb-2">Product &amp; UX Design</div><h3 class="text-[23px] tracking-[-.02em] mb-2">GoRoqit</h3><p class="text-[15px] text-muted">A hiring platform for the beauty industry — connecting salons and barbers with verified stylists through social-style profiles, instant job posts and smart matching.</p></div>
-      </a>
     </div>
   </section>
 
   <!-- EXPERIENCE -->
-  <section class="py-[100px] max-w-[1200px] mx-auto px-6" id="experience">
-    <div class="reveal opacity-0 translate-y-7 transition-all duration-700 ease-out flex items-end justify-between gap-5 mb-12 flex-wrap">
-      <div>
-        <span class="inline-flex items-center gap-2 border border-white/10 rounded-full px-4 py-2 text-[13px] font-semibold text-text"><span class="w-[7px] h-[7px] rounded-full bg-accent shadow-[0_0_10px_#c6f73d]"></span> Career</span>
-        <h2 class="text-[clamp(32px,5vw,54px)] tracking-[-.03em] font-extrabold leading-none mt-4">Experience</h2>
-      </div>
+  <section id="experience" class="max-w-[1180px] mx-auto px-6 py-24">
+    <div class="reveal opacity-0 translate-y-4 transition-all duration-700 ease-out mb-14">
+      <span class="font-mono text-[12px] tracking-widest uppercase text-accent">§ 03 — Career</span>
+      <h2 class="font-display text-[clamp(34px,5vw,56px)] leading-[1.05] mt-3">Experience</h2>
     </div>
-    <div class="reveal opacity-0 translate-y-7 transition-all duration-700 ease-out">
-      <div class="grid grid-cols-1 bp:grid-cols-[200px_1fr_auto] gap-2 bp:gap-[30px] items-center px-7 py-[26px] bg-card border border-white/10 rounded-r mb-3.5 transition-colors duration-300 hover:border-accent/25">
-        <div class="text-[14px] text-muted">Jun 2025 — Present</div>
-        <div><h3 class="text-[21px] tracking-[-.01em]">UI/UX Designer · <span class="text-accent">Sparktech Agency</span></h3><p class="text-[15px] text-muted mt-1">Designing digital products and experiences for clients across [industries].</p></div>
-        <span class="justify-self-start bp:justify-self-auto text-[12px] font-semibold text-accent border border-accent/30 px-[14px] py-1.5 rounded-full whitespace-nowrap">Current</span>
+    <div class="reveal opacity-0 translate-y-4 transition-all duration-700 ease-out border-t border-border">
+      <div class="grid grid-cols-1 md:grid-cols-[200px_1fr_auto] gap-3 md:gap-10 items-baseline border-b border-border py-9">
+        <div class="font-mono text-[12px] tracking-widest uppercase text-muted-foreground">Jun 2025 — Present</div>
+        <div>
+          <h3 class="font-display text-[26px] leading-tight">UI/UX Designer · <span class="text-accent">Sparktech Agency</span></h3>
+          <p class="text-[15px] leading-relaxed text-muted-foreground mt-2">Designing digital products and experiences for clients across [industries].</p>
+        </div>
+        <span class="font-mono text-[11px] tracking-widest uppercase text-accent border border-accent/40 rounded px-3 py-1.5 whitespace-nowrap justify-self-start md:justify-self-auto">Current</span>
       </div>
     </div>
   </section>
 
   <!-- CONTACT -->
-  <section class="bg-accent text-ink rounded-[40px] mx-6 mb-6 text-center py-[100px] px-6" id="contact">
-    <div class="reveal opacity-0 translate-y-7 transition-all duration-700 ease-out">
-      <span class="inline-flex items-center gap-2 border border-black/10 text-ink bg-light rounded-full px-4 py-2 text-[13px] font-semibold">Let's work together</span>
-      <h2 class="text-[clamp(40px,8vw,92px)] tracking-[-.04em] font-black leading-[.95] mb-[30px] mt-[22px]">Have a project<br>in mind?</h2>
-      <a href="mailto:labibahmad336@gmail.com" class="group inline-flex items-center gap-3 bg-ink text-text no-underline pl-[26px] pr-2 py-2 rounded-full text-[17px] font-semibold transition-transform duration-200 hover:-translate-y-0.5">labibahmad336@gmail.com <span class="w-10 h-10 rounded-full bg-accent text-ink flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">↗</span></a>
-      <div class="flex gap-3.5 justify-center mt-9 flex-wrap">
-        <a href="https://www.linkedin.com/in/ahmad-zakaria-labib-b798a31ab/" target="_blank" rel="noopener" class="text-ink no-underline text-[14px] font-semibold border border-ink/25 px-5 py-2.5 rounded-full transition-colors duration-200 hover:bg-ink/10">LinkedIn ↗</a>
-        <a href="https://www.behance.net/labibahmad007" target="_blank" rel="noopener" class="text-ink no-underline text-[14px] font-semibold border border-ink/25 px-5 py-2.5 rounded-full transition-colors duration-200 hover:bg-ink/10">Behance ↗</a>
+  <section id="contact" class="bg-card border-t border-border">
+    <div class="max-w-[1180px] mx-auto px-6 py-28">
+      <div class="reveal opacity-0 translate-y-4 transition-all duration-700 ease-out max-w-[820px]">
+        <span class="font-mono text-[12px] tracking-widest uppercase text-accent">§ 04 — Contact</span>
+        <h2 class="font-display text-[clamp(44px,8vw,104px)] leading-[.98] tracking-[-.01em] mt-5 mb-10">Have a project <em class="italic text-accent">in mind?</em></h2>
+        <a href="mailto:labibahmad336@gmail.com" class="group inline-flex items-center gap-3 font-display text-[clamp(22px,3vw,34px)] text-foreground transition-colors hover:text-accent border-b border-border hover:border-accent pb-1">
+          labibahmad336@gmail.com <span class="text-2xl transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+        </a>
+        <div class="flex flex-wrap gap-3 mt-12">
+          <a href="https://www.linkedin.com/in/ahmad-zakaria-labib-b798a31ab/" target="_blank" rel="noopener" class="font-mono text-[12px] tracking-widest uppercase border border-border rounded px-5 py-2.5 text-foreground transition-colors hover:bg-secondary">LinkedIn ↗</a>
+          <a href="https://www.behance.net/labibahmad007" target="_blank" rel="noopener" class="font-mono text-[12px] tracking-widest uppercase border border-border rounded px-5 py-2.5 text-foreground transition-colors hover:bg-secondary">Behance ↗</a>
+          <a href="https://drive.google.com/uc?export=download&id=1ThRpTD6toeixikvnv1KU6n-6PQm_Xwyd" target="_blank" rel="noopener" class="font-mono text-[12px] tracking-widest uppercase bg-accent text-accent-foreground rounded px-5 py-2.5 transition-opacity hover:opacity-90">Download résumé ↓</a>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- FOOTER -->
-  <footer class="max-w-[1200px] mx-auto px-6 py-[30px] flex justify-between text-muted text-[14px] flex-wrap gap-2">
-    <div class="flex flex-col gap-1">
+  <footer class="max-w-[1180px] mx-auto px-6 py-12 flex flex-col md:flex-row justify-between gap-4 font-mono text-[11px] tracking-widest uppercase text-muted-foreground">
+    <div class="flex flex-col gap-1.5">
       <span>© 2025 Ahmad Zakaria Labib</span>
-      <span>UI/UX Designer · Designed &amp; built with care</span>
+      <span>UI/UX Designer — Designed &amp; built with care</span>
     </div>
-    <div class="flex gap-6 flex-wrap">
-      <a href="mailto:labibahmad336@gmail.com" class="text-muted no-underline transition-colors hover:text-text">labibahmad336@gmail.com</a>
-      <a href="tel:01608956236" class="text-muted no-underline transition-colors hover:text-text">01608956236</a>
+    <div class="flex flex-wrap gap-6">
+      <a href="mailto:labibahmad336@gmail.com" class="hover:text-accent transition-colors">labibahmad336@gmail.com</a>
+      <a href="tel:01608956236" class="hover:text-accent transition-colors">01608956236</a>
     </div>
   </footer>
 
   <script>
     const obs = new IntersectionObserver((es) => es.forEach(e => {
       if (e.isIntersecting) {
-        e.target.classList.remove('opacity-0', 'translate-y-7');
+        e.target.classList.remove('opacity-0', 'translate-y-4');
         e.target.classList.add('opacity-100', 'translate-y-0');
         obs.unobserve(e.target);
       }
